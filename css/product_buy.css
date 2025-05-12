@@ -1,0 +1,113 @@
+.ui-wrapper {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  zoom: 1; }
+
+.ui-wrapper img {
+  display: block;
+  max-width: 100%; }
+
+.ui-wrapper .ui-viewport {
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0); }
+
+.ui-wrapper .ui-pager, .ui-wrapper .ui-controls-auto {
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+  width: 100%;
+  z-index: 999; }
+
+.ui-wrapper .ui-loading {
+  min-height: 50px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999; }
+
+.ui-wrapper .ui-pager {
+  font-size: 12px;
+  text-align: center;
+  color: #666; }
+
+.ui-wrapper .ui-pager .ui-pager-item, .ui-wrapper .ui-controls-auto .ui-controls-auto-item {
+  display: inline-block;
+  zoom: 1;
+  display: inline; }
+
+.ui-wrapper .ui-pager.ui-default-pager a {
+  display: block;
+  width: 6px;
+  height: 6px;
+  margin: 0 5px;
+  border: 2px solid #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  text-align: left;
+  text-indent: -9999px;
+  overflow: hidden;
+  zoom: 1;
+  background: #f5f5f5;
+  background: rgba(0, 0, 0, 0.4);
+  -webkit-transition: all .2s;
+  transition: all .2s; }
+
+.ui-wrapper .ui-pager.ui-default-pager a:hover, .ui-wrapper .ui-pager.ui-default-pager a.active {
+  background: #fff;
+  background: rgba(255, 255, 255, 0.4);
+  border-color: #757575;
+  border-color: rgba(0, 0, 0, 0.4); }
+
+.ui-wrapper .ui-pager.ui-default-pager a:focus {
+  outline: 0; }
+
+.ui-wrapper .ui-prev {
+  left: 0;
+  background: url(//i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -84px 50%; }
+
+.ui-wrapper .ui-next {
+  right: 0;
+  background: url(//i1.mifile.cn/f/i/2014/cn/icon/icon-slides.png) no-repeat -125px 50%; }
+
+.ui-wrapper .ui-prev:hover {
+  background-position: 0 50%; }
+
+.ui-wrapper .ui-next:hover {
+  background-position: -42px 50%; }
+
+.ui-wrapper .ui-controls-direction a {
+  position: absolute;
+  top: 50%;
+  z-index: 999;
+  width: 41px;
+  height: 69px;
+  margin-top: -35px;
+  text-indent: -9999px;
+  overflow: hidden;
+  zoom: 1;
+  outline: 0; }
+
+.ui-wrapper .ui-controls-direction a.disabled {
+  display: none; }
+
+.modal-order-prize .prize-mitu .close {
+  color: #757575; }
+
+.modal-order-prize .prize-mitu .close:hover {
+  color: #fff; }
+
+.modal-aftersale .title {
+  font-size: 20px;
+  margin-bottom: 20px; }
+
+.modal-aftersale img {
+  max-width: 100%;
+  display: block; }
+
+.modal-aftersale .modal-body {
+  overflow: auto;
+  margin-bottom: 20px; }
