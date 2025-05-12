@@ -16,15 +16,15 @@ require.config({
         "jquery-cookie": ["jquery"],
         //声明当前模块不遵从AMD
         "parabola": {
-			exports: "_"
-		}
+            exports: "_"
+        }
     }
 })
 
-require(["nav", "goodsDesc"], function(nav, goodsDesc){
+require(["nav", "goodsDesc"], function (nav, goodsDesc) {
     nav.topNavDownload();
     nav.topNavTab();
-    nav.searchTab(); 
+    nav.searchTab();
     nav.allGoodsTab();
     //侧边栏加载
     nav.leftNavDownload();
@@ -35,4 +35,6 @@ require(["nav", "goodsDesc"], function(nav, goodsDesc){
     goodsDesc.download();
     goodsDesc.banner();
 
+    // 初始化标签页切换功能
+    goodsDesc.tabSwitch();
 })

@@ -11,6 +11,45 @@
     <meta name="keywords" content="小米,小米9,小米cc9,Redmi K20,Redmi Note 8,小米MIX3,小米商城" />
     <link rel="shortcut icon" href="//s01.mifile.cn/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/index.min.css" />
+    <style>
+        /* 修复导航菜单和搜索历史栏遮挡问题 */
+        #J_keywordList {
+            position: absolute !important;
+            z-index: 999 !important;
+            width: 100% !important;
+            top: 100% !important;
+            background: #fff !important;
+            border: 1px solid #e0e0e0 !important;
+            border-top: none !important;
+        }
+
+        .site-header .search-form {
+            position: relative !important;
+            z-index: 100 !important;
+        }
+
+        .header-nav .site-category {
+            z-index: 90 !important;
+        }
+
+        #J_navMenu {
+            z-index: 80 !important;
+        }
+
+        .header-logo {
+            z-index: 70 !important;
+        }
+
+        /* 确保搜索下拉框在导航之上 */
+        .keyword-list.is-visible {
+            display: block !important;
+        }
+
+        /* 搜索框焦点样式增强 */
+        #search:focus+.search-btn+#J_keywordList {
+            display: block !important;
+        }
+    </style>
     <script src='js/require.js' defer async='true' data-main='js/main.js'></script>
 </head>
 

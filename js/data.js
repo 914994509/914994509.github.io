@@ -1,9 +1,9 @@
 // 主页数据加载
-define(["jquery"], function($){
-    function download(){
+define(["jquery"], function ($) {
+    function download() {
         $.ajax({
             url: "../data/data.json",
-            success: function(arr){
+            success: function (arr) {
 
                 //第一部分数据加载
                 var firstData = arr[0];
@@ -45,9 +45,11 @@ define(["jquery"], function($){
                 node.appendTo(".page-main .container");
 
                 //通过循环将子元素进行创建
-                for(var i = 0; i < firstData.childs.length; i++){
+                for (var i = 0; i < firstData.childs.length; i++) {
+                    // 生成每个商品的唯一ID，如果没有ID，使用索引作为ID
+                    var productId = firstData.childs[i].product_id || (1000 + i);
                     $(`<li class = 'brick-item brick-item-m brick-item-m-2'>
-                        <a href="#">
+                        <a href="goodsDesc.html?product_id=${productId}">
                             <div class = 'figure figure-img'>
                                 <img width="160" height="160" src="${firstData.childs[i].img}" alt=""/>
                             </div>
@@ -66,9 +68,9 @@ define(["jquery"], function($){
                 }
 
 
-               
+
                 //后续部分数据加载
-                for(var i = 1; i < arr.length; i++){
+                for (var i = 1; i < arr.length; i++) {
                     var node2 = $(`<div class = 'home-banner-box'>
                         <a href="#">
                             <img src="${arr[i].topImg}" alt=""/>
@@ -121,10 +123,12 @@ define(["jquery"], function($){
                     node2.appendTo(".page-main .container");
 
                     var hotChilds = arr[i].hotChilds;
-                    for(var k = 0; k < hotChilds.length; k++){
+                    for (var k = 0; k < hotChilds.length; k++) {
+                        // 热门商品的唯一ID，如果没有ID，使用索引生成
+                        var hotProductId = hotChilds[k].product_id || (2000 + i * 100 + k);
                         $(`<div>
                             <li class = 'brick-item ${k == 7 ? "brick-item-s" : "brick-item-m brick-item-m-2"}'>
-                                <a href="#">
+                                <a href="goodsDesc.html?product_id=${hotProductId}">
                                     <div class = 'figure figure-img'>
                                         <img width="160" height="160" src="${hotChilds[k].img}" alt=""/>
                                     </div>
@@ -151,13 +155,14 @@ define(["jquery"], function($){
                         </li>`).appendTo(node2.find(".span16 .brick-list").eq(0));
 
                     var childs = arr[i].childs;
-                    
-                    
-                    for(var l = 0; l < childs.length; l++){
-                        
+
+
+                    for (var l = 0; l < childs.length; l++) {
+                        // 分类商品的唯一ID，如果没有ID，使用索引生成
+                        var childProductId = childs[l].product_id || (3000 + i * 100 + l);
                         $(`<div>
                             <li class = 'brick-item ${l == 7 ? "brick-item-s" : "brick-item-m brick-item-m-2"}'>
-                                <a href="#">
+                                <a href="goodsDesc.html?product_id=${childProductId}">
                                     <div class = 'figure figure-img'>
                                         <img width="160" height="160" src="${childs[l].img}" alt=""/>
                                     </div>
@@ -189,8 +194,8 @@ define(["jquery"], function($){
     }
 
     //通过事件委托添加切换函数
-    function tabMenu(){
-        $(".page-main .container").on("mouseenter", ".more .tab-list li", function(){
+    function tabMenu() {
+        $(".page-main .container").on("mouseenter", ".more .tab-list li", function () {
             $(this).addClass("tab-active").siblings("li").removeClass("tab-active");
 
             //同时切换显示的商品内容

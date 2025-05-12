@@ -1,183 +1,447 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Document</title>
-        <style>
-            body {
-                margin: 0;
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小米账号 - 注册</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+        }
+
+        .h_panel,
+        .login_banner {
+            width: 1130px;
+            margin: 0 auto;
+        }
+
+        .h_logo {
+            width: 200px;
+            height: 98px;
+            background: url(https://account.xiaomi.com/static/res/7f6f2f5/account-static/respassport/acc-2014/img/mistore_logo.png) no-repeat;
+            float: left;
+        }
+
+        .h_logo a {
+            display: block;
+            height: 98px;
+            text-indent: -9999em;
+        }
+
+        /* 顶部导航 */
+        .top-nav {
+            position: absolute;
+            right: 20px;
+            top: 30px;
+        }
+
+        .top-nav a {
+            color: #838383;
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 14px;
+        }
+
+        .top-nav a:hover {
+            color: #ff6700;
+        }
+
+        .login_banner_panel {
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-image: linear-gradient(120deg, #4b5cc4, #6f42c1, #b967c7);
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 注册框样式 */
+        .layout {
+            width: 410px !important;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            padding: 30px;
+            margin-right: 100px;
+            position: relative !important;
+            right: auto !important;
+            top: auto !important;
+            transform: none !important;
+        }
+
+        /* 标题样式 */
+        .header_tit_txt {
+            font-size: 24px;
+            color: #333;
+            margin: 10px 0 30px;
+            font-weight: normal;
+        }
+
+        /* 表单样式 */
+        .login_area {
+            padding: 0;
+        }
+
+        .labelbox {
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .labelbox:hover {
+            border-color: #ff6700;
+        }
+
+        .item_account {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            font-size: 14px;
+            border: none;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        /* 按钮样式 */
+        .btnadpt {
+            width: 100%;
+            height: 50px;
+            background: #ff6700;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btnadpt:hover {
+            background: #f85000;
+        }
+
+        /* 底部链接 */
+        .other_panel {
+            margin-top: 20px;
+        }
+
+        .reverse a {
+            color: #ff6700;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* 其他登录方式 */
+        .other_login_type {
+            margin-top: 30px;
+        }
+
+        .oth_type_tit {
+            border: none;
+            border-top: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .oth_type_txt {
+            font-size: 14px;
+            color: #999;
+            padding: 0 10px;
+        }
+
+        .oth_type_links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .icon_type {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f5f5f5;
+            line-height: 40px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .icon_type:hover {
+            transform: scale(1.1);
+            background: #e0e0e0;
+        }
+
+        /* 错误提示样式 */
+        .err_tip {
+            margin: 10px 0;
+            color: #ff6700;
+            font-size: 12px;
+        }
+
+        .icon_error {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        /* 注册标签切换 */
+        .nav_tabs {
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .navtab-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 16px;
+            margin-right: 30px;
+            padding-bottom: 10px;
+            position: relative;
+        }
+
+        .navtab-link.now {
+            color: #ff6700;
+        }
+
+        .navtab-link.now:after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #ff6700;
+        }
+
+        /* 底部版权 */
+        .n-footer {
+            position: fixed;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            z-index: 100;
+        }
+
+        .nf-link-area {
+            margin-bottom: 10px;
+        }
+
+        .lang-select-list {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .lang-select-list li {
+            margin: 0 5px;
+        }
+
+        .lang-select-list a {
+            color: #999;
+            text-decoration: none;
+        }
+
+        .lang-select-list a:hover {
+            color: #ff6700;
+        }
+
+        /* 响应式调整 */
+        @media screen and (max-width: 1200px) {
+            .content-wrapper {
+                flex-direction: column;
+                justify-content: center;
             }
-        
-            .h_panel,
-            .login_banner {
-                width: 1130px;
+
+            .layout {
                 margin: 0 auto;
             }
-        
-            .h_logo {
-                width: 200px;
-                height: 98px;
-                background: url(https://account.xiaomi.com/static/res/7f6f2f5/account-static/respassport/acc-2014/img/mistore_logo.png) no-repeat;
-            }
-        
-            .h_logo a {
-                display: block;
-                height: 98px;
-                text-indent: -9999em;
-            }
-        
-            .login_banner_panel {
-                /* background:#1e2f40;*/
-                width: 100%;
-                height: 588px;
-                position: absolute;
-                left: 0;
-                top: 98px;
-                background-repeat: no-repeat;
-                background-position: top center;
-            }
-        
-            .login_banner_panel a {
-                display: block;
-                height: 588px;
-                text-indent: -9999em;
-            }
-        </style>
-        <link rel="stylesheet" href="css/login.css">
-        <!-- 模块化开发 -->
-        <script src = 'js/require.js' async = true  defer data-main = 'js/main2'></script>
-    </head>
-    <body class = 'zh_CN mistore_theme'>
-        <div class = 'wrapper'>
-            <div class = 'bgiframe' style = 'display: block;'>
-                <div class="h_panel">
-                    <div class="h_logo">
-                        <a href="/index.html" target="_parent">小米网</a>
-                    </div>
+        }
+    </style>
+    <link rel="stylesheet" href="css/login.css">
+    <!-- 模块化开发 -->
+    <script src='js/require.js' async='true' defer data-main='js/main2'></script>
+</head>
+
+<body class='zh_CN mistore_theme'>
+    <div class='wrapper'>
+        <div class='bgiframe' style='display: block;'>
+            <div class="h_panel">
+                <div class="h_logo">
+                    <a href="/index.html" target="_parent">小米网</a>
                 </div>
-                <div class="login_banner_panel" id="J_panel" style="background-image: url(&quot;https://cdn.cnbj1.fds.api.mi-img.com/mi-mall/2e3028877530620f50043efb01575e3d.jpg&quot;);">
-                    <!-- 底部定位的bg -->
-                    <a href="/index.html" target="_parent" id="J_link">小米网</a>
+                <div class="top-nav">
+                    <a href="#">用户协议</a>
+                    <a href="#">隐私政策</a>
+                    <a href="#">帮助中心</a>
+                    <a href="#">中文(简体)</a>
                 </div>
-                
             </div>
-            <div class="wrap">                
-                <div class="layout_panel">                  
-                    <div class="layout" id="layout" style = 'width: 410px; position: fixed; right: 400px; top: 110px;'>                    
-                        <div id="main-content" >                      
-                            <!--表单输入登录-->                      
-                            <div class="mainbox form-panel" id="login-main" style="display: block;">                        
-                                <div id="custom_display_2"><a class="ercode" id="qrcode-trigger" href="javascript:void(0)"></a></div>                        <!-- header s -->                        
-                                <div class="lgnheader">                          
-                                    <div class="header_tit t_c">                            
-                                        <em id="custom_display_1" class="milogo">                              
-                                            <svg width="100%" height="100%" version="1.1" xmlns="http://www.w3.org/2000/svg">
+            <div class="login_banner_panel" id="J_panel">
+                <div class="content-wrapper">
+                    <!-- 这里可以添加左侧图片或动画 -->
+                    <div class="layout" id="layout">
+                        <div id="main-content">
+                            <!--表单输入登录-->
+                            <div class="mainbox form-panel" id="login-main" style="display: block;">
+                                <div class="lgnheader">
+                                    <div class="header_tit t_c">
+                                        <em id="custom_display_1" class="milogo">
+                                            <svg width="48" height="48" version="1.1"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <rect width="48" height="48" rx="3" ry="3" style="fill:#ff6700"></rect>
                                                 <rect x="10" y="15" width="4.2" height="18" style="fill:#FFFFFF"></rect>
-                                                <rect x="33.75" y="15" width="4.2" height="18" style="fill:#FFFFFF"></rect>
-                                                <rect x="11.25" y="15" width="15" height="4.1" style="fill:#FFFFFF"></rect>
-                                                <rect x="26.2" y="20.55" width="4.2" height="12.5" style="fill:#FFFFFF"></rect>
-                                                <rect x="20.6" y="15" width="9.8" height="9.8" rx="4.4" ry="4.4" style="fill:#FFFFFF"></rect>
-                                                <rect x="20.2" y="19" width="6" height="6" rx="2" ry="2" style="fill:#ff6700"></rect>
-                                                <rect x="18" y="19.1" width="4" height="2.2" style="fill:#ff6700"></rect>
-                                                <rect x="24.2" y="23" width="1.94" height="10" style="fill:#ff6700"></rect>
-                                                <rect x="18.1" y="22.8" width="4.2" height="10.2" style="fill:#FFFFFF"></rect></svg>                            
-                                            </em>                            
-                                            <h4 class="header_tit_txt" id="login-title">小米帐号注册</h4>                          
-                                            <div class="site_info"></div>
-                                        </div>                        
-                                    </div>                       
-                                        <!-- header e -->                        <!-- tab s -->                        
-                                        <div class="nav_tabs_panel">                          
-                                            <div id="nav-tabs" class="nav_tabs">                            
-                                                <a class="navtab-link now" href="javascript:void(0);" data-tab="pwd">帐号登录</a>
-                                                <span class="line"></span>                            
-                                                <a class="navtab-link" href="javascript:void(0);" data-tab="qr">扫码登录</a>                          
-                                            </div>                        
-                                        </div>                        <!-- tab e -->                        <!-- tab con s -->                        
-                                        <div class="tabs-con tabs_con now" data-con="pwd" style="display: block;">                          
-                                            <div>                            
-                                                <div class="login_area" id="login-main-form">                                
-                                                    <div class="loginbox c_b">                                  
-                                                        <!-- 输入框 -->                                  
-                                                        <div class="lgn_inputbg c_b login-panel pwdLogin">                                    
-                                                            <!--验证用户名-->                                    
-                                                            <div class="single_imgarea" id="account-info">                                      
-                                                                <div class="na-img-area" id="account-avator" style="display:none">                                        
-                                                                    <div class="na-img-bg-area" id="account-avator-con"></div>                                      
-                                                                </div>                                      
-                                                                <p class="us_name tac" id="account-displayname"></p>                                      
-                                                                <p class="us_id tac"></p>                                    
-                                                            </div>                                    
-                                                            <label id="region-code" class="labelbox login_user c_b" for="">                                                                                                                                                             
-                                                                <input class="item_account" autocomplete="off" type="text" name="user" id="username" placeholder="邮箱/手机号码/小米ID">                                                                                                                                   
-                                                            </label>                                    
-                                                                                              
-                                                            <label class="labelbox pwd_panel c_b">                                      
-                                                                <input class="item_account" type="password" placeholder="密码" autocomplete="off" id="pwd" name="password">                                                              
-                                                            </label>    
-                                                            <label class="labelbox pwd_panel c_b">                                      
-                                                                <input class="item_account" type="password" placeholder="确认密码" autocomplete="off" id="pwd" name="repassword">                                                              
-                                                            </label>                                  
-                                                        </div>                                  
-                                                                                                                  
-                                                            <!-- 错误信息 -->                                  
-                                                            <div class="err_tip">      
-                                                                                           
-                                                                <div><em class="icon_error"></em><span class="error-con">11</span></div>                                  
-                                                            </div>                                  
-                                                            <div class="btns_bg">                                    
-                                                                <input class="btnadpt" id="register-button" type="button" value="注册">                                    
-                                                                <span id="custom_display_8" class="sns-default-container sns_default_container" style="display: none;">                                      
-                                                                </span>                                  
-                                                            </div>  
+                                                <rect x="33.75" y="15" width="4.2" height="18" style="fill:#FFFFFF">
+                                                </rect>
+                                                <rect x="11.25" y="15" width="15" height="4.1" style="fill:#FFFFFF">
+                                                </rect>
+                                                <rect x="26.2" y="20.55" width="4.2" height="12.5" style="fill:#FFFFFF">
+                                                </rect>
+                                                <rect x="20.6" y="15" width="9.8" height="9.8" rx="4.4" ry="4.4"
+                                                    style="fill:#FFFFFF"></rect>
+                                                <rect x="20.2" y="19" width="6" height="6" rx="2" ry="2"
+                                                    style="fill:#ff6700"></rect>
+                                                <rect x="18" y="19.1" width="4" height="2.2" style="fill:#ff6700">
+                                                </rect>
+                                                <rect x="24.2" y="23" width="1.94" height="10" style="fill:#ff6700">
+                                                </rect>
+                                                <rect x="18.1" y="22.8" width="4.2" height="10.2" style="fill:#FFFFFF">
+                                                </rect>
+                                            </svg>
+                                        </em>
+                                        <h4 class="header_tit_txt" id="login-title">小米账号注册</h4>
+                                    </div>
+                                </div>
 
-                                                            <div class="other_panel clearfix">  
-                                                                <div class="reverse" id="extra-links">                                      
-                                                                    <div class="n_links_area reg_forget_links reg-forget-links" id="custom_display_64">                                        
-                                                                        <a class="outer-link" href="/login.html">立即登陆</a><span>|</span>                                        
-                                                                        <a class="outer-link" href="https://account.xiaomi.com/pass/forgetPassword?callback=https%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252F%26sign%3DNzY3MDk1YzczNmUwMGM4ODAxOWE0NjRiNTU5ZGQyMzFhYjFmOGU0Nw%2C%2C&amp;sid=mi_eshop&amp;_bannerBiz=mistore&amp;_qrsize=180">忘记密码？</a>                                      
-                                                                    </div>                                      
-                                                                    <div class="n_links_area sms_unavaliable_links sms-unavaliable-links"><a target="_blank" href="https://static.account.xiaomi.com/html/faq/faqSMSerror.html">收不到验证码？</a></div>                                    
-                                                                </div>                                   
-                                                                           
-                                                                <!-- 其他登录方式 s -->                                    
-                                                                <div style="display: block;" class="other_login_type sns-login-container" id="custom_display_16">                                      
-                                                                    <fieldset class="oth_type_tit">                                        
-                                                                        <legend align="center" class="oth_type_txt">其他方式登录</legend>                                      
-                                                                    </fieldset>                                      
-                                                                    <div id="sns-login-links" class="oth_type_links"><a class="icon_type btn_qq sns-login-link" data-type="qq" href="/pass/sns/login/auth?appid=100284651&amp;&amp;callback=https%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252F%26sign%3DNzY3MDk1YzczNmUwMGM4ODAxOWE0NjRiNTU5ZGQyMzFhYjFmOGU0Nw%2C%2C&amp;sid=mi_eshop" title="QQ登录" target="_blank"><i class="btn_sns_icontype icon_default_qq"></i></a><a class="icon_type btn_weibo sns-login-link" data-type="weibo" href="/pass/sns/login/auth?appid=2996826273&amp;&amp;callback=https%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252F%26sign%3DNzY3MDk1YzczNmUwMGM4ODAxOWE0NjRiNTU5ZGQyMzFhYjFmOGU0Nw%2C%2C&amp;sid=mi_eshop" title="微博登录" target="_blank"><i class="btn_sns_icontype icon_default_weibo"></i></a><a class="icon_type btn_alipay sns-login-link" data-type="alipay" href="/pass/sns/login/auth?appid=2088011127562160&amp;&amp;callback=https%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252F%26sign%3DNzY3MDk1YzczNmUwMGM4ODAxOWE0NjRiNTU5ZGQyMzFhYjFmOGU0Nw%2C%2C&amp;sid=mi_eshop" title="支付宝登录" target="_blank"><i class="btn_sns_icontype icon_default_alipay"></i></a><a class="icon_type btn_weixin sns-login-link" data-type="weixin" href="/pass/sns/login/auth?appid=wxxmzh&amp;scope=snsapi_login&amp;callback=https%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252F%26sign%3DNzY3MDk1YzczNmUwMGM4ODAxOWE0NjRiNTU5ZGQyMzFhYjFmOGU0Nw%2C%2C&amp;sid=mi_eshop" title="微信登录" target="_blank"><i class="btn_sns_icontype icon_default_weixin"></i></a></div>                                    
-                                                                </div>                                    
-                                                                <!-- 其他登录方式 e -->                                    
-                                                                <p class="acq_tips" style="display: none;"></p>                                  
-                                                            </div>                                
-                                                        </div>                            
-                                                    </div>                          
-                                                </div>                        
-                                            </div>                        
-                                                              
-                                        </div>                      
-                                                           
-                                    </div>                    
-                                </div>                  
-                            </div>                
-                        </div>              
+                                <div class="nav_tabs_panel">
+                                    <div id="nav-tabs" class="nav_tabs">
+                                        <a class="navtab-link now" href="javascript:void(0);" data-tab="pwd">帐号注册</a>
+                                        <span class="line"></span>
+                                        <a class="navtab-link" href="javascript:void(0);" data-tab="qr">扫码注册</a>
+                                    </div>
+                                </div>
+
+                                <div class="tabs-con tabs_con now" data-con="pwd" style="display: block;">
+                                    <div>
+                                        <div class="login_area" id="login-main-form">
+                                            <div class="loginbox c_b">
+                                                <div class="lgn_inputbg c_b login-panel pwdLogin">
+                                                    <label id="region-code" class="labelbox login_user c_b" for="">
+                                                        <input class="item_account" autocomplete="off" type="text"
+                                                            name="user" id="username" placeholder="邮箱/手机号码/小米ID">
+                                                    </label>
+
+                                                    <label class="labelbox pwd_panel c_b">
+                                                        <input class="item_account" type="password" placeholder="密码"
+                                                            autocomplete="off" id="pwd" name="password">
+                                                    </label>
+                                                    <label class="labelbox pwd_panel c_b">
+                                                        <input class="item_account" type="password" placeholder="确认密码"
+                                                            autocomplete="off" id="repwd" name="repassword">
+                                                    </label>
+                                                </div>
+
+                                                <div class="err_tip" style="display: none;">
+                                                    <div><em class="icon_error"></em><span class="error-con"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="btns_bg">
+                                                    <input class="btnadpt" id="register-button" type="button"
+                                                        value="注册">
+                                                </div>
+
+                                                <div class="other_panel clearfix">
+                                                    <div class="reverse" id="extra-links">
+                                                        <div class="n_links_area reg_forget_links reg-forget-links"
+                                                            id="custom_display_64">
+                                                            <a class="outer-link"
+                                                                href="/login.html">立即登录</a><span>|</span>
+                                                            <a class="outer-link" href="#">忘记密码？</a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div style="display: block;"
+                                                        class="other_login_type sns-login-container"
+                                                        id="custom_display_16">
+                                                        <fieldset class="oth_type_tit">
+                                                            <legend align="center" class="oth_type_txt">其他方式登录</legend>
+                                                        </fieldset>
+                                                        <div id="sns-login-links" class="oth_type_links">
+                                                            <a class="icon_type btn_qq sns-login-link" data-type="qq"
+                                                                href="#" title="QQ登录" target="_blank" rel="noopener"><i
+                                                                    class="btn_sns_icontype icon_default_qq"></i></a>
+                                                            <a class="icon_type btn_weibo sns-login-link"
+                                                                data-type="weibo" href="#" title="微博登录" target="_blank"
+                                                                rel="noopener"><i
+                                                                    class="btn_sns_icontype icon_default_weibo"></i></a>
+                                                            <a class="icon_type btn_alipay sns-login-link"
+                                                                data-type="alipay" href="#" title="支付宝登录"
+                                                                target="_blank" rel="noopener"><i
+                                                                    class="btn_sns_icontype icon_default_alipay"></i></a>
+                                                            <a class="icon_type btn_weixin sns-login-link"
+                                                                data-type="weixin" href="#" title="微信登录" target="_blank"
+                                                                rel="noopener"><i
+                                                                    class="btn_sns_icontype icon_default_weixin"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-        </div>
-        <div id = 'custom_display_4' class = 'n-footer'>
-            <div class="nf-link-area clearfix">                
-                <ul class="lang-select-list">                  
-                    <li><a href="javascript:void(0)" data-lang="zh_CN" class="lang-select-li current">简体</a>|</li>                  
-                    <li><a href="?callback=https%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252F%26sign%3DNzY3MDk1YzczNmUwMGM4ODAxOWE0NjRiNTU5ZGQyMzFhYjFmOGU0Nw%2C%2C&amp;sid=mi_eshop&amp;_bannerBiz=mistore&amp;_qrsize=180&amp;_locale=zh_TW" data-lang="zh_TW" class="lang-select-li">繁体</a>|</li>                  
-                    <li><a href="?callback=https%3A%2F%2Forder.mi.com%2Flogin%2Fcallback%3Ffollowup%3Dhttps%253A%252F%252Fwww.mi.com%252F%26sign%3DNzY3MDk1YzczNmUwMGM4ODAxOWE0NjRiNTU5ZGQyMzFhYjFmOGU0Nw%2C%2C&amp;sid=mi_eshop&amp;_bannerBiz=mistore&amp;_qrsize=180&amp;_locale=en" data-lang="en" class="lang-select-li">English</a>|</li>                  
-                    <li><a href="https://static.account.xiaomi.com/html/faq/faqList.html" target="_blank">常见问题</a>|</li>                  
-                    <li><a id="msg-privacy" href="/about/protocol/privacy" target="_blank">隐私政策</a></li>                
-                </ul>              
+                </div>
             </div>
-            <p class="nf-intro">小米公司版权所有-京ICP备10046444-<a class="beian-record-link" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020134"><span><img src="https://account.xiaomi.com/static/res/9204d06/account-static/respassport/acc-2014/img/ghs.png"></span>京公网安备11010802020134号</a>-京ICP证110507号</p>
         </div>
-        
-    </body>
+    </div>
+    <div id='custom_display_4' class='n-footer'>
+        <div class="nf-link-area clearfix">
+            <ul class="lang-select-list">
+                <li><a href="javascript:void(0)" data-lang="zh_CN" class="lang-select-li current">简体</a>|</li>
+                <li><a href="#" data-lang="zh_TW" class="lang-select-li">繁体</a>|</li>
+                <li><a href="#" data-lang="en" class="lang-select-li">English</a>|</li>
+                <li><a href="#" target="_blank" rel="noopener">常见问题</a>|</li>
+                <li><a id="msg-privacy" href="#" target="_blank" rel="noopener">隐私政策</a></li>
+            </ul>
+        </div>
+        <p class="nf-intro">小米公司版权所有-京ICP备10046444-<a class="beian-record-link" target="_blank" rel="noopener"
+                href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020134"><span><img
+                        alt="京公网安备图标"
+                        src="https://account.xiaomi.com/static/res/9204d06/account-static/respassport/acc-2014/img/ghs.png"></span>京公网安备11010802020134号</a>-京ICP证110507号
+        </p>
+    </div>
+</body>
+
 </html>
